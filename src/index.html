@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>格子打豆豆游戏</title>
+    <style>
+      /* 像素字体 */
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+      body {
+        font-family: "Press Start 2P", cursive;
+        background-color: #7fc384; /* 柔和的草地绿色 */
+        background-image: url("data:image/png;base64,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"); /* 像素风格的草地纹理 */
+        image-rendering: pixelated;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+
+      .game-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 8px solid #4a3223; /* 木框颜色 */
+        border-radius: 10px;
+        box-shadow: inset 0 0 0 4px #7d5a3c, 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .instructions {
+        background-color: #f9e4b7; /* 羊皮纸颜色 */
+        border: 4px solid #8b4513;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+        color: #4a3223;
+        text-shadow: 1px 1px #fff5e6;
+        box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.2),
+          0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .score-board {
+        background-color: #4a3223;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .score-board span {
+        background-color: #f9e4b7;
+        color: #4a3223;
+        padding: 10px 20px;
+        border: 4px solid #8b4513;
+        margin: 0 10px;
+        display: inline-block;
+      }
+
+      #game-area {
+        width: 490px;
+        height: 490px;
+        border: 4px solid #000;
+        margin: 0 auto;
+        position: relative;
+        background-color: #ffffff;
+        cursor: crosshair;
+        background-image: linear-gradient(#666 1px, transparent 1px),
+          linear-gradient(90deg, #666 1px, transparent 1px);
+        background-size: 35px 35px;
+      }
+
+      .bean {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        image-rendering: pixelated;
+        transition: all 0.1s ease;
+        border-radius: 0;
+      }
+
+      /* 猫咪 - 暖橙色系 */
+      .bean-color-0 {
+        background-color: #ff9f43;
+        box-shadow: inset -4px -4px 0 #ee8130, inset 4px 4px 0 #ffbe76;
+        clip-path: polygon(
+          30% 0%,
+          70% 0%,
+          /* 耳朵 */ 100% 30%,
+          100% 100%,
+          /* 右边 */ 0% 100%,
+          0% 30% /* 左边 */
+        );
+      }
+      .bean-color-0::before,
+      .bean-color-0::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #ee8130;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .bean-color-0::before {
+        left: 20%;
+      }
+      .bean-color-0::after {
+        right: 20%;
+      }
+
+      /* 狗狗 - 薄荷绿系 */
+      .bean-color-1 {
+        background-color: #1dd1a1;
+        box-shadow: inset -4px -4px 0 #10ac84, inset 4px 4px 0 #48e5b6;
+        clip-path: polygon(
+          0% 30%,
+          30% 0%,
+          /* 左耳 */ 70% 0%,
+          100% 30%,
+          /* 右耳 */ 100% 100%,
+          0% 100% /* 底部 */
+        );
+      }
+      .bean-color-1::before,
+      .bean-color-1::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #10ac84;
+        border-radius: 50%;
+        top: 60%;
+        transform: translateY(-50%);
+      }
+      .bean-color-1::before {
+        left: 25%;
+      }
+      .bean-color-1::after {
+        right: 25%;
+      }
+
+      /* 小猪 - 樱花粉系 */
+      .bean-color-2 {
+        background-color: #ff9ff3;
+        box-shadow: inset -4px -4px 0 #f368e0, inset 4px 4px 0 #ffb8eb;
+        clip-path: polygon(
+          50% 0%,
+          /* 头顶 */ 100% 40%,
+          100% 100%,
+          /* 右边 */ 0% 100%,
+          0% 40% /* 左边 */
+        );
+      }
+      .bean-color-2::before,
+      .bean-color-2::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #f368e0;
+        border-radius: 50%;
+        top: 70%;
+      }
+      .bean-color-2::before {
+        left: 15%;
+      }
+      .bean-color-2::after {
+        right: 15%;
+      }
+
+      /* 兔子 - 天空蓝系 */
+      .bean-color-3 {
+        background-color: #54a0ff;
+        box-shadow: inset -4px -4px 0 #2e86de, inset 4px 4px 0 #70b3ff;
+        clip-path: polygon(
+          20% 0%,
+          40% 20%,
+          /* 左耳 */ 60% 20%,
+          80% 0%,
+          /* 右耳 */ 100% 30%,
+          100% 100%,
+          /* 右边 */ 0% 100%,
+          0% 30% /* 左边 */
+        );
+      }
+      .bean-color-3::before,
+      .bean-color-3::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #2e86de;
+        border-radius: 50%;
+        top: 65%;
+        transform: translateY(-50%);
+      }
+      .bean-color-3::before {
+        left: 20%;
+      }
+      .bean-color-3::after {
+        right: 20%;
+      }
+
+      /* 悬停效果 */
+      .bean:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        filter: brightness(1.2);
+      }
+
+      /* 修改消除动画 */
+      @keyframes throwBean1 {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        40% {
+          transform: translate(-50%, -120px) scale(0.9);
+          opacity: 1;
+        }
+        50% {
+          transform: translate(-50%, -150px) scale(0.9);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--carX), var(--carY)) scale(0.7);
+          opacity: 1;
+        }
+      }
+
+      @keyframes throwBean2 {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        45% {
+          transform: translate(-50%, -100px) scale(0.9);
+          opacity: 1;
+        }
+        55% {
+          transform: translate(-50%, -130px) scale(0.9);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--carX), var(--carY)) scale(0.7);
+          opacity: 1;
+        }
+      }
+
+      .bean-removing-1 {
+        animation: throwBean1 1.2s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+      }
+
+      .bean-removing-2 {
+        animation: throwBean2 1.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+      }
+
+      /* 小车样式 */
+      .rescue-car {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100px;
+        height: 60px;
+        transform: translateX(-100%);
+        animation: carMove 2s ease-in-out forwards;
+      }
+
+      @keyframes carMove {
+        0% {
+          transform: translateX(-100%);
+        }
+        40% {
+          transform: translateX(var(--stopX));
+        }
+        60% {
+          transform: translateX(var(--stopX));
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      #start-btn {
+        margin-top: 20px;
+        padding: 15px 30px;
+        font-family: "Press Start 2P", cursive;
+        font-size: 16px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border: 4px solid #fff;
+        box-shadow: 4px 4px 0 #000;
+        transition: all 0.1s ease;
+      }
+
+      #start-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 #000;
+      }
+
+      #start-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #000;
+      }
+
+      #start-btn:disabled {
+        background-color: #666;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 2px 2px 0 #000;
+      }
+
+      /* 修改豆豆落入车里的动画 */
+      @keyframes fallIntoCar {
+        0% {
+          transform: translate(var(--startX), var(--startY)) scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: translate(var(--midX), var(--midY)) scale(0.8);
+          opacity: 0.9;
+        }
+        100% {
+          transform: translate(var(--endX), var(--endY)) scale(0.6);
+          opacity: 1;
+        }
+      }
+
+      /* 车里的动物样式 */
+      .rescued-animal {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: all 0.3s ease;
+      }
+
+      .rescue-car {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100px;
+        height: 60px;
+        background-color: #ffd700; /* 黄色 */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateX(-100%);
+        animation: carMove 2s ease-in-out forwards;
+      }
+
+      .rescue-car::before,
+      .rescue-car::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        width: 20px;
+        height: 20px;
+        background-color: #333; /* 轮子颜色 */
+        border-radius: 50%;
+      }
+
+      .rescue-car::before {
+        left: 10px;
+      }
+
+      .rescue-car::after {
+        right: 10px;
+      }
+
+      /* 不同动物的样式 */
+      .rescued-animal-0 {
+        background-image: url("data:image/svg+xml,<svg>...可爱的猫咪SVG...</svg>");
+      }
+
+      .rescued-animal-1 {
+        background-image: url("data:image/svg+xml,<svg>...可爱的狗狗SVG...</svg>");
+      }
+
+      .rescued-animal-2 {
+        background-image: url("data:image/svg+xml,<svg>...可爱的小猪SVG...</svg>");
+      }
+
+      .rescued-animal-3 {
+        background-image: url("data:image/svg+xml,<svg>...可爱的兔子SVG...</svg>");
+      }
+
+      .falling-animal {
+        position: absolute;
+        animation: fallIntoCar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="bgm" loop>
+      <source src="https://pixijs.com/assets/bgm.mp3" type="audio/mp3" />
+    </audio>
+    <div class="game-container">
+      <div class="score-board">
+        <span>得分: <span id="score">0</span></span>
+        <span>时间: <span id="timer">0</span>秒</span>
+      </div>
+      <div class="instructions">
+        解救冻成砖块的小朋猫小朋狗！他们不配拥有一个家吗！（按 Enter 键防老板）
+      </div>
+      <div id="game-area"></div>
+      <button id="start-btn">开始游戏</button>
+    </div>
+
+    <script>
+      // 创建音频上下文
+      const audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+
+      // 创建音效函数
+      function createPopSound() {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // 设置音调和音量变化
+        oscillator.frequency.setValueAtTime(880, audioContext.currentTime); // 开始频率
+        oscillator.frequency.exponentialRampToValueAtTime(
+          440,
+          audioContext.currentTime + 0.1
+        ); // 结束频率
+
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime); // 初始音量
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.01,
+          audioContext.currentTime + 0.1
+        ); // 淡出
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.1);
+      }
+
+      let score = 0;
+      let timeLeft = 30;
+      let gameInterval;
+      let timerInterval;
+      let beans = []; // 存储豆豆的数组
+
+      const gameArea = document.getElementById("game-area");
+      const scoreElement = document.getElementById("score");
+      const timerElement = document.getElementById("timer");
+      const startBtn = document.getElementById("start-btn");
+
+      // 修改格子相关常量
+      const GRID_SIZE = 35; // 格子大小保持35px
+      const GRID_COUNT = 14; // 从20减少到14 (减少30%)
+
+      // 修改游戏区域大小
+      const GAME_AREA_SIZE = GRID_SIZE * GRID_COUNT; // 490px (14 * 35)
+
+      // 创建豆豆的类
+      class Bean {
+        constructor(x, y, colorIndex) {
+          this.element = document.createElement("div");
+          this.element.className = "bean";
+          this.gridX = x;
+          this.gridY = y;
+          this.x = (x + 0.5) * GRID_SIZE; // 使用新的格子大小
+          this.y = (y + 0.5) * GRID_SIZE;
+          this.colorIndex = colorIndex;
+          this.element.style.left = this.x + "px";
+          this.element.style.top = this.y + "px";
+          this.element.classList.add(`bean-color-${colorIndex}`);
+          gameArea.appendChild(this.element);
+        }
+
+        remove() {
+          return new Promise((resolve) => {
+            // 播放消失音效
+            createPopSound();
+
+            this.element.classList.add("bean-removing");
+            this.element.addEventListener("animationend", () => {
+              this.element.remove();
+              resolve();
+            });
+          });
+        }
+      }
+
+      // 获取鼠标在游戏区域内的坐标
+      function getMousePosition(event) {
+        const rect = gameArea.getBoundingClientRect();
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
+        };
+      }
+
+      function initGame() {
+        beans.forEach((bean) => bean.remove());
+        beans = [];
+
+        // 修改为实际的格子数量
+        const totalCells = GRID_COUNT * GRID_COUNT; // 14x14格子
+        const initialBeanCount = Math.floor(totalCells * 0.4); // 减少到40%避免太密集
+
+        // 创建所有可能的位置（包括边缘格子）
+        let positions = [];
+        for (let x = 0; x < GRID_COUNT; x++) {
+          for (let y = 0; y < GRID_COUNT; y++) {
+            positions.push({ x, y });
+          }
+        }
+
+        // 随机选择位置放置豆豆
+        for (let i = 0; i < initialBeanCount && positions.length > 0; i++) {
+          const randomIndex = Math.floor(Math.random() * positions.length);
+          const pos = positions.splice(randomIndex, 1)[0];
+          const colorIndex = Math.floor(Math.random() * 4);
+          const bean = new Bean(pos.x, pos.y, colorIndex);
+          beans.push(bean);
+        }
+      }
+
+      function startGame() {
+        // 恢复音频上下文（因为浏览器政策要求用户交互后才能播放声音）
+        if (audioContext.state === "suspended") {
+          audioContext.resume();
+        }
+
+        // 清理旧的豆豆
+        beans.forEach((bean) => bean.remove());
+        beans = [];
+
+        // 重置游戏状态
+        score = 0;
+        timeLeft = 120;
+        scoreElement.textContent = score;
+        timerElement.textContent = timeLeft;
+
+        // 禁用开按钮
+        startBtn.disabled = true;
+
+        // 创建初始豆豆
+        initGame();
+
+        // 设置定时器
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          timerElement.textContent = timeLeft;
+
+          if (timeLeft <= 0) {
+            endGame();
+          }
+        }, 1000);
+
+        // 定期移动豆豆
+        gameInterval = setInterval(createBean, 2000);
+
+        // 开始播放背景音乐
+        const bgm = document.getElementById("bgm");
+        bgm.volume = 0.3; // 设置音量
+        bgm
+          .play()
+          .catch((error) => console.log("Audio autoplay failed:", error));
+      }
+
+      function endGame() {
+        clearInterval(timerInterval);
+        clearInterval(gameInterval);
+        beans.forEach((bean) => bean.remove());
+        beans = [];
+        startBtn.disabled = false;
+        alert(`游戏结束！你的得分是：${score}`);
+
+        // 停止背景音乐
+        const bgm = document.getElementById("bgm");
+        bgm.pause();
+        bgm.currentTime = 0;
+      }
+
+      // 修改路径检查函数
+      function isPathBlocked(start, end, corner, beans) {
+        // 检查第一段线（从起点到拐角）
+        const path1Blocked = checkLinePath(
+          { x: start.gridX, y: start.gridY },
+          { x: corner.x, y: corner.y },
+          beans
+        );
+
+        // 检查第二段线（从拐角到终点）
+        const path2Blocked = checkLinePath(
+          { x: corner.x, y: corner.y },
+          { x: end.gridX, y: end.gridY },
+          beans
+        );
+
+        // 只要任意一条路径被阻挡，就返回 true
+        return path1Blocked || path2Blocked;
+      }
+
+      // 修改直线路径检查函数，使其更严格
+      function checkLinePath(start, end, beans) {
+        // 检查水平线
+        if (start.y === end.y) {
+          const minX = Math.min(start.x, end.x);
+          const maxX = Math.max(start.x, end.x);
+
+          // 检查这条线上是否有豆豆（排除起点和终点）
+          return beans.some(
+            (bean) =>
+              bean.gridY === start.y && bean.gridX > minX && bean.gridX < maxX
+          );
+        }
+
+        // 检查垂直线
+        if (start.x === end.x) {
+          const minY = Math.min(start.y, end.y);
+          const maxY = Math.max(start.y, end.y);
+
+          // 检查这条线上是否有豆豆（排除起点和终点）
+          return beans.some(
+            (bean) =>
+              bean.gridX === start.x && bean.gridY > minY && bean.gridY < maxY
+          );
+        }
+
+        return true; // 如不是水平或直线，则认为是被阻挡的
+      }
+
+      // 修改 checkClick 函数
+      function checkClick(clickPos) {
+        const gridX = Math.floor(clickPos.x / GRID_SIZE);
+        const gridY = Math.floor(clickPos.y / GRID_SIZE);
+
+        let closestMatch = null;
+        let minDistance = Infinity;
+
+        for (let i = 0; i < beans.length; i++) {
+          for (let j = i + 1; j < beans.length; j++) {
+            const bean1 = beans[i];
+            const bean2 = beans[j];
+
+            if (bean1.colorIndex === bean2.colorIndex) {
+              // 检查是否太近（水平或垂直方向）
+              const dx = Math.abs(bean1.gridX - bean2.gridX);
+              const dy = Math.abs(bean1.gridY - bean2.gridY);
+
+              // 跳过水平或垂直相邻及间隔一格的豆豆
+              if (
+                (bean1.gridX === bean2.gridX && dy <= 2) ||
+                (bean1.gridY === bean2.gridY && dx <= 2)
+              ) {
+                continue;
+              }
+
+              // 检查点击点是否在矩形区域内
+              const minX = Math.min(bean1.gridX, bean2.gridX);
+              const maxX = Math.max(bean1.gridX, bean2.gridX);
+              const minY = Math.min(bean1.gridY, bean2.gridY);
+              const maxY = Math.max(bean1.gridY, bean2.gridY);
+
+              if (
+                gridX >= minX &&
+                gridX <= maxX &&
+                gridY >= minY &&
+                gridY <= maxY
+              ) {
+                // 检查两个可能的拐角路径
+                const corners = [
+                  { x: bean1.gridX, y: bean2.gridY },
+                  { x: bean2.gridX, y: bean1.gridY },
+                ];
+
+                for (const corner of corners) {
+                  if (gridX === corner.x && gridY === corner.y) {
+                    // 检查拐角是否被占用
+                    const cornerOccupied = beans.some(
+                      (b) => b.gridX === corner.x && b.gridY === corner.y
+                    );
+
+                    if (!cornerOccupied) {
+                      // 检查路径是否被阻挡
+                      const pathBlocked = isPathBlocked(
+                        bean1,
+                        bean2,
+                        corner,
+                        beans.filter((b) => b !== bean1 && b !== bean2)
+                      );
+
+                      if (!pathBlocked) {
+                        const distance = Math.sqrt(
+                          Math.pow(clickPos.x - bean1.x, 2) +
+                            Math.pow(clickPos.y - bean1.y, 2)
+                        );
+
+                        if (distance < minDistance) {
+                          minDistance = distance;
+                          closestMatch = {
+                            type: "pair",
+                            beans: [bean1, bean2],
+                            corner: corner,
+                          };
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return closestMatch;
+      }
+
+      // 修改绘制连线函数
+      function drawLine(bean1, bean2, result) {
+        const canvas = document.createElement("canvas");
+        canvas.width = gameArea.clientWidth;
+        canvas.height = gameArea.clientHeight;
+        canvas.style.position = "absolute";
+        canvas.style.left = "0";
+        canvas.style.top = "0";
+        canvas.style.pointerEvents = "none";
+        gameArea.appendChild(canvas);
+
+        const ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#FFD700";
+        ctx.lineWidth = 4;
+        ctx.setLineDash([8, 8]);
+        ctx.shadowColor = "#FFD700";
+        ctx.shadowBlur = 10;
+
+        // 计算拐角点的精确坐标
+        const cornerX = (result.corner.x + 0.5) * GRID_SIZE;
+        const cornerY = (result.corner.y + 0.5) * GRID_SIZE;
+
+        // 绘制严格的水平垂直线段
+        ctx.beginPath();
+        ctx.moveTo(bean1.x, bean1.y);
+
+        // 先绘制第一段（水平或垂直）
+        if (bean1.gridX === result.corner.x) {
+          // 垂直线
+          ctx.lineTo(bean1.x, cornerY);
+        } else {
+          // 水平线
+          ctx.lineTo(cornerX, bean1.y);
+        }
+
+        // 再绘制第二段（垂直或水平）
+        ctx.lineTo(bean2.x, bean2.y);
+
+        ctx.stroke();
+
+        setTimeout(() => {
+          canvas.remove();
+        }, 500);
+      }
+
+      // 修改点击事件处理
+      gameArea.addEventListener("click", async (event) => {
+        if (timeLeft <= 0 || startBtn.disabled === false) return;
+
+        const clickPos = getMousePosition(event);
+        const result = checkClick(clickPos);
+
+        if (result) {
+          // 先画连线
+          drawLine(result.beans[0], result.beans[1], result);
+
+          // 播放消除音效
+          createPopSound();
+
+          // 创建小车
+          const car = document.createElement("div");
+          car.className = "rescue-car";
+
+          // 计算小车停止位置（在两个豆豆中间）
+          const stopX =
+            Math.min(result.beans[0].x, result.beans[1].x) +
+            Math.abs(result.beans[0].x - result.beans[1].x) / 2;
+          car.style.setProperty("--stopX", `${stopX}px`);
+
+          gameArea.appendChild(car);
+
+          // 添加消除动画
+          result.beans[0].element.classList.add("bean-removing-1");
+          result.beans[1].element.classList.add("bean-removing-2");
+
+          // 等待动画完成
+          await Promise.all([
+            new Promise((resolve) => {
+              result.beans[0].element.addEventListener("animationend", () => {
+                result.beans[0].element.remove();
+                resolve();
+              });
+            }),
+            new Promise((resolve) => {
+              result.beans[1].element.addEventListener("animationend", () => {
+                result.beans[1].element.remove();
+                resolve();
+              });
+            }),
+          ]);
+
+          // 从数组中移除豆豆
+          beans = beans.filter((bean) => !result.beans.includes(bean));
+
+          // 更新分数
+          score++;
+          scoreElement.textContent = score;
+
+          // 等待小车离开
+          setTimeout(() => {
+            car.remove();
+          }, 2000);
+        }
+      });
+
+      startBtn.addEventListener("click", startGame);
+
+      // 初始化游戏
+      window.addEventListener("DOMContentLoaded", () => {
+        for (let i = 0; i < 4; i++) {
+          createBean();
+        }
+      });
+
+      // 添加检查是否还有可消除的豆豆的函数
+      function hasMatchableBeans() {
+        // 检是否有可消除的三豆豆组合
+        for (let i = 0; i < beans.length; i++) {
+          for (let j = i + 1; j < beans.length; j++) {
+            for (let k = j + 1; k < beans.length; k++) {
+              if (
+                beans[i].colorIndex === beans[j].colorIndex &&
+                beans[j].colorIndex === beans[k].colorIndex
+              ) {
+                return true;
+              }
+            }
+          }
+        }
+
+        // 检查是否有可消除的两豆豆组合
+        for (let i = 0; i < beans.length; i++) {
+          for (let j = i + 1; j < beans.length; j++) {
+            if (beans[i].colorIndex === beans[j].colorIndex) {
+              return true;
+            }
+          }
+        }
+
+        return false;
+      }
+
+      // 在创建豆豆后检查是否要重新生成
+      function createBeanWithCheck() {
+        createBean();
+        if (!hasMatchableBeans()) {
+          // 如果没有可消除的组合，重新生成所有豆豆
+          beans.forEach((bean) => bean.remove());
+          beans = [];
+          initGame();
+        }
+      }
+
+      // 修改小车创建和豆豆收集逻辑
+      function createRescueCar() {
+        const car = document.createElement("div");
+        car.className = "rescue-car";
+
+        const carBody = document.createElement("div");
+        carBody.className = "car-body";
+
+        const container = document.createElement("div");
+        container.className = "car-container";
+
+        const wheels = document.createElement("div");
+        wheels.className = "car-wheels";
+
+        carBody.appendChild(container);
+        car.appendChild(carBody);
+        car.appendChild(wheels);
+
+        return { car, container };
+      }
+
+      // 在 script 标签开始处添加新闻切换功能
+      const newsContent = `
+        <div class="news-container">
+            <header class="news-header">
+                <h1>每日新闻</h1>
+                <div class="news-time">${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</div>
+            </header>
+            <div class="news-grid">
+                <article class="news-item">
+                    <h2>科技创新助力经济发展</h2>
+                    <p>近日，多项重大科技创新成果在各领域取得突破，为经济高质量发展注入新动能...</p>
+                </article>
+                <article class="news-item">
+                    <h2>环保政策推动绿色转型</h2>
+                    <p>新能源产业发展迅速，多地出台支持政策，助力实现"双碳"目标...</p>
+                </article>
+                <article class="news-item">
+                    <h2>教育改革深入推进</h2>
+                    <p>教育部发布新政策，进一步推进素质教育发展，促进教育公平...</p>
+                </article>
+                <!-- 更多新闻条目 -->
+            </div>
+        </div>
+        `;
+
+      // 添加新闻页面样式
+      const newsStyles = `
+        <style>
+            .news-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #fff;
+                font-family: Arial, sans-serif;
+            }
+
+            .news-header {
+                border-bottom: 2px solid #eee;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+
+            .news-header h1 {
+                margin: 0;
+                color: #333;
+            }
+
+            .news-time {
+                color: #666;
+                font-size: 14px;
+                margin-top: 5px;
+            }
+
+            .news-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+
+            .news-item {
+                padding: 15px;
+                border: 1px solid #eee;
+                border-radius: 5px;
+            }
+
+            .news-item h2 {
+                margin: 0 0 10px 0;
+                font-size: 18px;
+                color: #333;
+            }
+
+            .news-item p {
+                margin: 0;
+                color: #666;
+                line-height: 1.5;
+            }
+        </style>
+        `;
+
+      // 保存原始内容的变量
+      let originalContent = "";
+      let isShowingNews = false;
+
+      // 添加键盘事件监听
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          const container = document.querySelector(".game-container");
+
+          if (!isShowingNews) {
+            // 保存游戏内容
+            originalContent = container.innerHTML;
+            // 显示新闻
+            container.innerHTML = newsStyles + newsContent;
+            isShowingNews = true;
+          } else {
+            // 恢复游戏内容
+            container.innerHTML = originalContent;
+            isShowingNews = false;
+            // 重新绑定事件监听器
+            rebindGameEvents();
+          }
+        }
+      });
+
+      // 重新绑定游戏事件的数
+      function rebindGameEvents() {
+        // 重新获取DOM元素
+        gameArea = document.getElementById("game-area");
+        scoreElement = document.getElementById("score");
+        timerElement = document.getElementById("timer");
+        startBtn = document.getElementById("start-btn");
+
+        // 重新绑定点击事件
+        gameArea.addEventListener("click", handleGameClick);
+        startBtn.addEventListener("click", startGame);
+      }
+
+      // 修改豆豆落入小车的逻辑
+      function createFallingAnimal(bean, car, container) {
+        const animal = document.createElement("div");
+        animal.className = `rescued-animal rescued-animal-${bean.colorIndex} falling-animal`;
+
+        // 计算起点（豆豆当前位置）
+        const startX = bean.x;
+        const startY = bean.y;
+
+        // 计算终点（车里的随机位置）
+        const endX = car.offsetLeft + container.offsetLeft + Math.random() * 60;
+        const endY = car.offsetTop + container.offsetTop + Math.random() * 20;
+
+        // 计算中点（抛物线顶点）
+        const midX = (startX + endX) / 2;
+        const midY = Math.min(startY, endY) - 100; // 抛物线高度
+
+        // 设置动画变量
+        animal.style.setProperty("--startX", `${startX}px`);
+        animal.style.setProperty("--startY", `${startY}px`);
+        animal.style.setProperty("--midX", `${midX}px`);
+        animal.style.setProperty("--midY", `${midY}px`);
+        animal.style.setProperty("--endX", `${endX}px`);
+        animal.style.setProperty("--endY", `${endY}px`);
+
+        // 添加到游戏区域
+        gameArea.appendChild(animal);
+
+        // 动画结束后移动到车里
+        animal.addEventListener("animationend", () => {
+          animal.classList.remove("falling-animal");
+          container.appendChild(animal);
+          animal.style.transform = "none";
+          animal.style.left = `${Math.random() * 60}px`;
+          animal.style.top = `${Math.random() * 15}px`;
+        });
+      }
+
+      // 创建不同动物的音效函数
+      function createAnimalSound(colorIndex) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // 根据动物类型设置不同的音效
+        switch (colorIndex) {
+          case 0: // 猫咪
+            oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(
+              440,
+              audioContext.currentTime + 0.1
+            );
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(
+              0.01,
+              audioContext.currentTime + 0.1
+            );
+            break;
+
+          case 1: // 狗狗
+            oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(
+              110,
+              audioContext.currentTime + 0.2
+            );
+            gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(
+              0.01,
+              audioContext.currentTime + 0.2
+            );
+            break;
+
+          case 2: // 小猪
+            oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(
+              220,
+              audioContext.currentTime + 0.15
+            );
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(
+              0.01,
+              audioContext.currentTime + 0.15
+            );
+            break;
+
+          case 3: // 兔子
+            oscillator.frequency.setValueAtTime(1100, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(
+              550,
+              audioContext.currentTime + 0.08
+            );
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(
+              0.01,
+              audioContext.currentTime + 0.08
+            );
+            break;
+        }
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.3);
+      }
+
+      // 修改点击事件处理中的音效部分
+      if (result) {
+        // 播放对应动物的音效
+        result.beans.forEach((bean) => {
+          createAnimalSound(bean.colorIndex);
+        });
+      }
+    </script>
+  </body>
+</html>
